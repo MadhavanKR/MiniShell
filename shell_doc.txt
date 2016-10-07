@@ -1,0 +1,26 @@
+Interprocess communication
+
+->In parent process we create a pipe using system call PIPE(fd[2])
+
+->in child1 we execute processes that is left of pipe. this process will
+ be the writer process. Therefore in child1 we close the read end of pipe
+ i.e fd[0] and close stdout i.e 1. make fd[1] duplicate file descriptor
+ to stdout and then exec the corresponding program.
+
+->in child2 we execite processes that is to the right of pipe. this
+  process will be the reader process. therefore in child2 we close the
+  write end of the pipe i.e fd[1] and close stdin i.e 0. make fd[0]
+  duplicate file descriptod to stdin and hen exec the corresponding
+  program
+
+->how do we know which program will be the writer and which program will
+  be the reader?
+  we keep count of the child processes created. and decide it as follows
+  if(child_count % 2)
+    reader process
+  else
+    writer process
+
+->finally, after all the processes have been executed, the output will be
+  in the pipe. therefore to print the output, close the write end of pipe
+  in parent and output from the read end of the pipe.

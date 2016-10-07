@@ -1,0 +1,11 @@
+a.out
+complete_shell.cpp
+exec.cpp
+ipc.cpp
+ls
+parse.cpp
+parse_pipe.cpp
+shell.cpp
+shell_doc.txt
+trail.cpp
+wc
